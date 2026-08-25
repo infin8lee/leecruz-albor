@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lee Cruz-Albor — Web Design & Development</title>
+<meta name="description" content="Freelance web designer & developer. I build fast, beautiful, immersive websites and experiences for businesses, brands, and events." />
+<meta property="og:title" content="Lee Cruz-Albor — Web Design & Development" />
+<meta property="og:description" content="Freelance web designer & developer building immersive websites and digital experiences." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07080d;
+    --bg-2: #0c0e17;
+    --panel: #10131f;
+    --line: rgba(255,255,255,0.09);
+    --text: #eef0f7;
+    --muted: #9aa0b4;
+    --gold: #e8b04b;
+    --gold-soft: #f4d08a;
+    --blue: #6f8cff;
+    --radius: 18px;
+    --maxw: 1120px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; margin: 0; }
+  ::selection { background: var(--gold); color: #1a1204; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(7,8,13,0.55);
+    border-bottom: 1px solid transparent;
+    transition: border-color .4s var(--ease), background .4s var(--ease);
+  }
+  header.nav.scrolled { border-bottom-color: var(--line); background: rgba(7,8,13,0.8); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 600; letter-spacing: .01em; }
+  .brand .mark {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff, var(--gold) 45%, #6b4d12 100%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.15), 0 0 22px rgba(232,176,75,.5);
+    position: relative;
+  }
+  .brand .mark::after {
+    content: ""; position: absolute; inset: -3px; border-radius: 50%;
+    background: radial-gradient(circle at 62% 40%, var(--bg) 30%, transparent 33%);
+  }
+  .nav-links { display: flex; align-items: center; gap: 30px; font-size: .93rem; color: var(--muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    border: 1px solid var(--line); padding: 9px 17px; border-radius: 999px; color: var(--text);
+    transition: border-color .25s, background .25s, transform .25s;
+  }
+  .nav-cta:hover { border-color: var(--gold); background: rgba(232,176,75,.08); transform: translateY(-1px); }
+  @media (max-width: 720px){ .nav-links a:not(.nav-cta){ display:none; } }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; }
+  #stars { position: absolute; inset: 0; z-index: 0; }
+  .hero-glow {
+    position: absolute; z-index: 0; top: 8%; left: 50%; transform: translateX(-50%);
+    width: 620px; height: 620px; max-width: 90vw;
+    background: radial-gradient(circle, rgba(232,176,75,.16), rgba(111,140,255,.05) 42%, transparent 66%);
+    filter: blur(6px); pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; padding: 120px 0 80px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px; font-size: .82rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--gold-soft); margin-bottom: 26px;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .hero h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); }
+  .hero h1 .accent { font-style: italic; color: var(--gold-soft); }
+  .hero p.lead { max-width: 620px; font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--muted); margin: 26px 0 0; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 999px;
+    font-weight: 500; font-size: 1rem; transition: transform .25s var(--ease), box-shadow .25s, background .25s;
+  }
+  .btn-primary { background: var(--gold); color: #1a1204; box-shadow: 0 10px 34px rgba(232,176,75,.28); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(232,176,75,.4); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; color: var(--muted); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .scroll-hint .line { width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent); animation: drop 2.2s var(--ease) infinite; }
+  @keyframes drop { 0%{ transform: scaleY(0); transform-origin: top; } 45%{ transform: scaleY(1); transform-origin: top; } 55%{ transform: scaleY(1); transform-origin: bottom; } 100%{ transform: scaleY(0); transform-origin: bottom; } }
+
+  /* SECTION SHELL */
+  section { position: relative; padding: 108px 0; }
+  .section-head { max-width: 640px; margin-bottom: 56px; }
+  .section-tag { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .section-head h2 { font-size: clamp(2rem, 4.5vw, 3.1rem); }
+  .section-head p { color: var(--muted); font-size: 1.08rem; margin-top: 18px; }
+
+  /* SERVICES */
+  .services { background: linear-gradient(var(--bg), var(--bg-2)); }
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px){ .service-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 32px 30px; transition: transform .3s var(--ease), border-color .3s, background .3s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(232,176,75,.4); }
+  .card .ico { font-size: 1.6rem; margin-bottom: 20px; display: inline-grid; place-items: center; width: 50px; height: 50px; border-radius: 13px; background: rgba(232,176,75,.1); border: 1px solid rgba(232,176,75,.25); }
+  .card h3 { font-size: 1.35rem; margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: .98rem; margin: 0; }
+
+  /* WORK */
+  .work-grid { display: grid; gap: 22px; }
+  .project {
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; overflow: hidden;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 22px;
+    transition: border-color .35s, transform .35s var(--ease);
+  }
+  .project:hover { border-color: rgba(232,176,75,.45); transform: translateY(-3px); }
+  .project:nth-child(even) .project-visual { order: 2; }
+  @media (max-width: 820px){ .project { grid-template-columns: 1fr; } .project:nth-child(even) .project-visual { order: 0; } }
+  .project-visual { position: relative; min-height: 300px; overflow: hidden; }
+  .project-visual .scene { position: absolute; inset: 0; }
+  .project-body { padding: 42px 40px; display: flex; flex-direction: column; justify-content: center; }
+  .project-body .num { font-family: "Fraunces", serif; color: var(--gold); font-size: .95rem; letter-spacing: .1em; margin-bottom: 14px; }
+  .project-body h3 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .project-body .desc { color: var(--muted); margin: 16px 0 24px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .tag { font-size: .78rem; color: var(--gold-soft); border: 1px solid rgba(232,176,75,.28); padding: 5px 12px; border-radius: 999px; }
+  .visit { display: inline-flex; align-items: center; gap: 9px; font-weight: 500; color: var(--text); width: fit-content; }
+  .visit .url { color: var(--gold-soft); }
+  .visit svg { transition: transform .25s var(--ease); }
+  .project:hover .visit svg { transform: translate(3px,-3px); }
+
+  /* project scene gradients */
+  .scene.s-aus { background: radial-gradient(120% 90% at 70% 20%, #16224a 0%, #0a0f26 55%, #05060f 100%); }
+  .scene.s-deck { background: radial-gradient(120% 100% at 30% 30%, #3a2a5e 0%, #171029 55%, #08060f 100%); }
+  .scene.s-flight { background: radial-gradient(120% 100% at 60% 80%, #4a2d16 0%, #1e130a 55%, #070502 100%); }
+  .scene .corona {
+    position: absolute; top: 46%; left: 50%; width: 120px; height: 120px; transform: translate(-50%,-50%); border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #fff, var(--gold-soft) 40%, transparent 62%);
+    box-shadow: 0 0 60px 20px rgba(232,176,75,.35);
+  }
+  .scene .corona::after { content:""; position:absolute; inset: 14%; border-radius:50%; background: radial-gradient(circle at 55% 45%, #05060f 46%, transparent 48%); }
+  .scene .ring { position:absolute; top:46%; left:50%; width:190px; height:190px; transform: translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,.12); }
+
+  /* APPROACH */
+  .approach { background: var(--bg-2); }
+  .approach-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+  @media (max-width: 860px){ .approach-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .steps { display: grid; gap: 4px; }
+  .step { display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+  .step .k { font-family: "Fraunces", serif; color: var(--gold); font-size: 1.1rem; min-width: 34px; }
+  .step h4 { margin: 0 0 5px; font-size: 1.12rem; }
+  .step p { margin: 0; color: var(--muted); font-size: .96rem; }
+  .stat-block { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 26px 22px; }
+  .stat .big { font-family: "Fraunces", serif; font-size: 2.4rem; color: var(--gold-soft); line-height: 1; }
+  .stat .lbl { color: var(--muted); font-size: .9rem; margin-top: 10px; }
+
+  /* CONTACT */
+  .contact { text-align: center; }
+  .contact-card {
+    position: relative; overflow: hidden; border-radius: 28px; border: 1px solid var(--line);
+    background: radial-gradient(120% 140% at 50% 0%, rgba(232,176,75,.14), transparent 55%), var(--panel);
+    padding: 84px 32px;
+  }
+  .contact h2 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+  .contact p { color: var(--muted); max-width: 520px; margin: 20px auto 38px; font-size: 1.1rem; }
+  .contact .btn-primary { font-size: 1.05rem; }
+  .contact .alt { margin-top: 22px; font-size: .95rem; color: var(--muted); }
+  .contact .alt a { color: var(--gold-soft); border-bottom: 1px solid rgba(232,176,75,.35); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--line); padding: 40px 0; color: var(--muted); font-size: .9rem; }
+  .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .scroll-hint .line { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="mark"></span> Lee Cruz-Albor</a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="stars"></canvas>
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow"><span class="dot"></span> Freelance web design &amp; development</span>
+      <h1>Websites that feel<br>like <span class="accent">experiences.</span></h1>
+      <p class="lead">I design and build fast, striking websites for businesses, brands, and events, from a simple landing page to fully interactive, immersive experiences that people remember.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start a project →</a>
+        <a href="#work" class="btn btn-ghost">See recent work</a>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>Scroll</span><span class="line"></span></div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">What I do</span>
+        <h2>Design and build, under one roof.</h2>
+        <p>You get one person who handles the whole thing, from the first sketch to the live, fast-loading site. No handoffs, no gaps.</p>
+      </div>
+      <div class="service-grid">
+        <div class="card reveal">
+          <span class="ico">✦</span>
+          <h3>Web Design</h3>
+          <p>Distinctive, on-brand interfaces with real art direction. Layout, type, motion, and visual identity that make a business look established and trustworthy.</p>
+        </div>
+        <div class="card reveal">
+          <span class="ico">⌘</span>
+          <h3>Development</h3>
+          <p>Hand-built, performant front-ends and the backends behind them, forms, signups, databases, and integrations. Responsive, accessible, and quick on every device.</p>
+        </div>
+        <div class="card reveal">
+          <span class="ico">◎</span>
+          <h3>Interactive &amp; Experiential</h3>
+          <p>When a page needs to do more than sit still: animation, WebGL scenes, simulations, and immersive experiences that turn a visit into something memorable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">Selected work</span>
+        <h2>Recent projects.</h2>
+        <p>A run of live sites built around a shared theme, real events with real audiences, where design and engineering had to carry the moment.</p>
+      </div>
+
+      <div class="work-grid">
+        <!-- Project 1 -->
+        <article class="project reveal">
+          <div class="project-visual"><div class="scene s-aus"><div class="ring"></div><div class="corona"></div></div></div>
+          <div class="project-body">
+            <div class="num">01</div>
+            <h3>Australasia Eclipse 2028</h3>
+            <p class="desc">A community-driven event platform for the total solar eclipse crossing Australia &amp; New Zealand. Cosmic art direction, an email signup pipeline, and content that lets the audience help shape the gathering.</p>
+            <div class="tags"><span class="tag">Event Platform</span><span class="tag">Web Design</span><span class="tag">Signups &amp; Data</span></div>
+            <a class="visit" href="https://australasiaeclipse.com" target="_blank" rel="noopener">Visit <span class="url">australasiaeclipse.com</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project reveal">
+          <div class="project-visual"><div class="scene s-deck"><div class="ring"></div><div class="corona"></div></div></div>
+          <div class="project-body">
+            <div class="num">02</div>
+            <h3>Midnight Sun</h3>
+            <p class="desc">A polished pitch deck delivered as a fast web experience, not a static PDF. Built for presenting to partners and investors, with a clean narrative flow and art direction that holds attention.</p>
+            <div class="tags"><span class="tag">Pitch Deck</span><span class="tag">Web Design</span><span class="tag">Storytelling</span></div>
+            <a class="visit" href="https://deck.midnightsun.com" target="_blank" rel="noopener">Visit <span class="url">deck.midnightsun.com</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project reveal">
+          <div class="project-visual"><div class="scene s-flight"><div class="ring"></div><div class="corona"></div></div></div>
+          <div class="project-body">
+            <div class="num">03</div>
+            <h3>Eclipse Flight</h3>
+            <p class="desc">Immersive, interactive eclipse flight simulators for Iceland 2026, Egypt 2027, and New Zealand 2028. Real-time WebGL scenes and photographic art direction that put visitors in the sky above each eclipse.</p>
+            <div class="tags"><span class="tag">WebGL</span><span class="tag">Interactive</span><span class="tag">Simulation</span></div>
+            <a class="visit" href="https://eclipseflight.com" target="_blank" rel="noopener">Visit <span class="url">eclipseflight.com</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach" id="approach">
+    <div class="wrap approach-grid">
+      <div class="reveal">
+        <span class="section-tag">How it works</span>
+        <h2 style="font-size:clamp(1.9rem,4vw,2.8rem); margin-bottom:14px;">A simple, honest process.</h2>
+        <p style="color:var(--muted); margin:0 0 30px;">Clear steps, clear communication, and a site you actually own at the end of it.</p>
+        <div class="steps">
+          <div class="step"><span class="k">01</span><div><h4>Discover</h4><p>We talk through your business, your audience, and what the site needs to do. I come back with a direction.</p></div></div>
+          <div class="step"><span class="k">02</span><div><h4>Design</h4><p>I create the look and layout, and we refine it together until it feels right, before a line of production code.</p></div></div>
+          <div class="step"><span class="k">03</span><div><h4>Build</h4><p>I develop the real thing, responsive, fast, and accessible, and wire up the pieces that make it work.</p></div></div>
+          <div class="step"><span class="k">04</span><div><h4>Launch</h4><p>We go live, I hand over everything, and I'm around for support and improvements as you grow.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="stat-block">
+          <div class="stat"><div class="big">3+</div><div class="lbl">Live sites shipped</div></div>
+          <div class="stat"><div class="big">1:1</div><div class="lbl">You work directly with me</div></div>
+          <div class="stat"><div class="big">100%</div><div class="lbl">Custom, hand-built</div></div>
+          <div class="stat"><div class="big">∞</div><div class="lbl">Attention to detail</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <h2>Let's build something<br>worth remembering.</h2>
+        <p>Got a business, a brand, or an event that deserves a site to match? Tell me about it, first conversation is free.</p>
+        <a href="mailto:hello@example.com?subject=Website%20project" class="btn btn-primary" id="contactBtn">Get in touch →</a>
+        <div class="alt">Or email me directly at <a href="mailto:hello@example.com" id="contactEmail">hello@example.com</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© <span id="yr"></span> Lee Cruz-Albor. Designed &amp; built by hand.</span>
+    <span>Web design &amp; development · Available for freelance work</span>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // nav shadow
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { e.target.style.transitionDelay = (i % 3) * 80 + 'ms'; e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // starfield hero
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cv = document.getElementById('stars');
+    const ctx = cv.getContext('2d');
+    let w, h, dpr, stars;
+    function init() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = cv.clientWidth; h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(220, Math.floor(w * h / 7000));
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        r: Math.random() * 1.3 + 0.2,
+        a: Math.random() * 0.6 + 0.15,
+        tw: Math.random() * 0.02 + 0.004,
+        ph: Math.random() * Math.PI * 2
+      }));
+    }
+    function draw(t) {
+      ctx.clearRect(0, 0, w, h);
+      for (const s of stars) {
+        const alpha = s.a + Math.sin(t * s.tw + s.ph) * 0.18;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,244,214,' + Math.max(0, alpha) + ')';
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    const ro = () => init();
+    init(); requestAnimationFrame(draw);
+    window.addEventListener('resize', ro);
+  })();
+</script>
+</body>
+</html>
