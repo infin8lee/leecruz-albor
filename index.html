@@ -49,7 +49,10 @@
   .nav-links a:hover { color: var(--ink); }
   .nav-links .btn-sm { color: var(--ink); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; transition: border-color .25s, background .25s; }
   .nav-links .btn-sm:hover { border-color: var(--rose); background: var(--rose-tint); }
-  @media (max-width: 680px){ .nav-links a:not(.btn-sm){ display: none; } }
+  @media (max-width: 680px){
+    .nav-links { gap: 16px; font-size: .86rem; }
+    .nav-links .btn-sm { padding: 7px 13px; }
+  }
 
   /* HERO */
   .hero { padding: 92px 0 70px; }
@@ -113,6 +116,42 @@
   /* FOOTER */
   footer { border-top: 1px solid var(--line); padding: 34px 0; }
   .foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: .88rem; }
+
+  /* ===== Tablet (<=1024px) ===== */
+  @media (max-width: 1024px) {
+    section { scroll-margin-top: 78px; }
+    .hero { padding: 72px 0 56px; }
+    .tiles { gap: 16px; }
+    .svc-grid { gap: 14px; }
+    .tiles .tile.feature .meta { padding: 28px; }
+  }
+  /* ===== Phone (<=680px) ===== */
+  @media (max-width: 680px) {
+    .wrap { padding: 0 18px; }
+    header.nav .nav-inner { height: 60px; }
+    .brand { font-size: .96rem; gap: 9px; }
+    section { padding: 52px 0; scroll-margin-top: 70px; }
+    .hero { padding: 48px 0 44px; }
+    .eyebrow { margin-bottom: 18px; font-size: .74rem; }
+    .hero p { margin-top: 18px; }
+    .hero .actions { margin-top: 28px; width: 100%; }
+    .hero .actions .btn { flex: 1 1 auto; justify-content: center; }
+    .sec-head { margin-bottom: 24px; }
+    .tile .meta { padding: 18px 16px 20px; }
+    .tile .meta h3 { font-size: 1.14rem; }
+    .tile .meta p { font-size: .92rem; margin: 8px 0 12px; }
+    .tiles .tile.feature .meta { padding: 20px 18px 22px; }
+    .svc { padding: 24px 20px; }
+    .contact { padding: 64px 0; }
+    .contact p { font-size: 1rem; margin-bottom: 28px; }
+    .contact .btn { width: 100%; justify-content: center; }
+    .foot { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+  /* comfortable tap targets on touch devices */
+  @media (pointer: coarse) {
+    .nav-links a, .btn, .tile { -webkit-tap-highlight-color: rgba(183,110,121,.12); }
+    .tile:hover, .svc:hover, .btn:hover { transform: none; }
+  }
 
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
   .reveal.in { opacity: 1; transform: none; }
@@ -182,8 +221,8 @@
         </a>
 
         <!-- Tile 3 (placeholder until deck screenshot available) -->
-        <a class="tile reveal" href="https://infin8lee.github.io/midnight-sun-deck/" target="_blank" rel="noopener">
-          <div class="thumb"><img src="assets/midnightsun.png" alt="Midnight Sun investor deck website" loading="lazy" /></div>
+        <a class="tile reveal" href="https://deck.midnightsun.com" target="_blank" rel="noopener">
+          <div class="thumb placeholder"><span>Midnight Sun</span></div>
           <div class="meta">
             <div class="top">
               <h3>Midnight Sun</h3>
